@@ -4,24 +4,12 @@
 #include <cstring>
 #include <cctype>
 #include <fstream>
-#include <struct>
+#include <functions.h>
+#include <functions.cpp>
 
 
 using namespace std;
 
-struct Record
-{
-    char name[30];
-    char address[30];
-    char city[28];
-    char state[2];
-    unsigned int zipCode;
-    unsigned int birthDate;
-    unsigned int licensedDate;
-    unsigned int expirationDate;
-    char radioClass;
-    char callSign[5];
-};
 //function headers here
 
 int main(int argc, char *argv[])
@@ -29,9 +17,17 @@ int main(int argc, char *argv[])
     //declare variables here
 
     //main function here
+    if (argc != 4)
+    {
+        cout << "Usage: prog1.exe, oldFile, newGood, newBad";
+        return 0;
+    }
+    //open files, check for error
 
+    //read in record, check for error
+
+    //output to correct file
+
+    //close files
     return 0;
 }
-
-//write functions here
-
