@@ -384,16 +384,8 @@ bool isError(bool errors[], int size)
 
 void printGood(Record rec, ofstream &fout)
 {
-    fout << "name:           " << setw(10) << rec.name << endl;
-    fout << "address:        " << setw(10) << rec.address << endl;
-    fout << "city:           " << setw(10) << rec.city << endl;
-    fout << "state:          " << setw(10) << rec.state << endl;
-    fout << "zipCode:        " << setw(10) << rec.zipCode << endl;
-    fout << "birthDate:      " << setw(10) << rec.birthDate << endl;
-    fout << "liscensedDate:  " << setw(10) << rec.licensedDate << endl;
-    fout << "expirationDate: " << setw(10) << rec.expirationDate << endl;
-    fout << "radioClass:     " << setw(10) << rec.radioClass << endl;
-    fout << "callSign:       " << setw(10) << rec.callSign << endl;
+    fout.seekp(0, ios::end);
+    fout.write((char *) &rec, sizeof(Record));
 }
 
 //prints all errors to text file
@@ -406,17 +398,19 @@ void printErrors(Record rec, bool errors[], ofstream &fout)
     fout << fixed << setprecision(5) << endl;
     fout << "Name:             " << rec.name <<  endl;
     fout << "Address:          " << rec.address << endl;
-    fout << "City State Zip:   " << rec.city << ", " << rec.state << " "
-        << extractBitInt(rec.zipCode, 14, 18) << "-" << setprecision(4)
-        << extractBitInt(rec.zipCode, 0, 14) << endl;
+    fout << "City State Zip:   " << rec.city << ", " << rec.state[0]
+        << rec.state[1] << " " << extractBitInt(rec.zipCode, 14, 18)
+        << "-" << setprecision(4) << extractBitInt(rec.zipCode, 0, 14) << endl;
     fout << "Birthdate:        " << extractMonth(rec.birthDate) << "/"
         << extractDay(rec.birthDate) << "/"<< extractYear(rec.birthDate) << endl;
     fout << "Licensing Dates:  " << extractMonth(rec.licensedDate) 
         << "/" << extractDay(rec.licensedDate) << "/" << extractYear(rec.licensedDate)
         << " - " << extractMonth(rec.expirationDate) << "/" << extractDay(rec.expirationDate)
         << "/" << extractYear(rec.expirationDate) << endl;
-    fout << "Class - Callsign: " << rec.radioClass << " - " << rec.callSign << endl;
+    fout << "Class - Callsign: " << rec.radioClass << " - " << rec.callSign[0]
+        << rec.callSign[1] << rec.callSign[2] << rec.callSign[3] << rec.callSign[4] << endl;
 
+    fout << endl;
     if (errors[0] == true)
     {
         fout << "Invalid character in the name field" << endl;
