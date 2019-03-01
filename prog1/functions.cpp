@@ -31,11 +31,7 @@ bool isNameOrCityError(char name[])
     int count = 0;
     while (name[count] != '\0')
     {
-        if (isalpha(name[count]) || ' ' == name[count] || '.' == name[count])
-        {
-            ;
-        }
-        else
+        if (!isalpha(name[count]) && ' ' != name[count] && '.' != name[count])
         {
             return true;
         }
@@ -62,13 +58,9 @@ bool isAddressError(char address[])
     int count = 0;
     while (address[count] != '\0')
     {
-        if (isalpha(address[count]) || ' ' == address[count]
-            || '.' == address[count] || isdigit(address[count])
-            || '#' == address[count])
-        {
-            ;
-        }
-        else
+        if (!isalpha(address[count]) && ' ' != address[count]
+            && '.' != address[count] && !isdigit(address[count])
+            && '#' != address[count])
         {
             return true;
         }
@@ -514,11 +506,7 @@ void isCallSignError(char arr[5], bool errors[])
 {
     //checks if characters in call sign are letters
     
-    if (arr[0] == 'K' || arr[0] == 'W' || arr[0] == 'N')
-    {
-        
-    }
-    else
+    if (arr[0] != 'K' && arr[0] != 'W' && arr[0] != 'N')
     {
         //error if charactor is not a valid letter
         errors[16] = true;
@@ -529,19 +517,11 @@ void isCallSignError(char arr[5], bool errors[])
         }
     }
     
-    if (isupper(arr[1]) || isupper(arr[3]) || isupper(arr[4]))
-    {
-        ;
-    }
-    else
+    if (!isupper(arr[1]) && !isupper(arr[3]) && !isupper(arr[4]))
     {
         //error if charactor is not uppercase
         errors[17] = true;
-        if (!isalpha(arr[1]) || !isalpha(arr[2]) || !isalpha(arr[3]))
-        {
-            ;
-        }
-        else
+        if (isalpha(arr[1]) && isalpha(arr[2]) && isalpha(arr[3]))
         {
             //error if charactor is not a letter
             errors[19] = true;

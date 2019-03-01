@@ -6,7 +6,7 @@
  *
  * @mainpage Program 1 - Database Checker
  *
- * @section Section2 - 1:00 pm
+ * @section Course Info
  *
  * @author David Mathews
  *
@@ -49,10 +49,14 @@
  * @par Compiling Instructions:
  *      None
  *
- * @par Usage:
+ * @par Usage: 
    @verbatim
-   c:\>prog1.exe
-   d:\> c:\bin\prog1.exe
+   c:\>prog1.exe oldFile.bin, newGood.bin, newBad.txt
+   d:\> c:\bin\prog1.exe oldFile.bin, newGood.bin, newBad.txt
+
+   oldFile.bin - The file containing records to be checked for errors
+   newGood.bin - The file that good records are to be stored in
+   newBad.txt - The file to output bad records and their errors to
    @endverbatim
  *
  * @section todo_bugs_modification_section Todo, Bugs, and Modifications
@@ -61,7 +65,7 @@
  * @todo check for typos
  * @todo error check code thouroughly
  *
- * <a href="https://gitlab.mcs.sdsmt.edu/7472735/csc215s19programs.git">
+ * <a href="https://gitlab.mcs.sdsmt.edu/7472735/csc215s19programs/commits/master">
  The gitlab commit log</a>
  *****************************************************************************/
 #pragma pack(1)
@@ -99,7 +103,7 @@ int main(int argc, char *argv[])
     //main function here
     if (argc != 4)
     {
-        cout << "Usage: prog1.exe, oldFile, newGood, newBad";
+        cout << "Usage: prog1.exe, oldFile.bin, newGood.bin, newBad.txt";
         return 0;
     }
 
