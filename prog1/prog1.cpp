@@ -139,7 +139,7 @@ int main(int argc, char *argv[])
         isBirthDateError(currentRec.birthDate, errors);
         isLicenseDateError(currentRec.licensedDate, errors);
         isExpirationDateError(currentRec, errors);
-        isRadioClassError(currentRec.radioClass);
+        errors[17] = isRadioClassError(currentRec.radioClass);
         isCallSignError(currentRec.callSign, errors);
         //output to correct file
         

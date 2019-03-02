@@ -486,11 +486,11 @@ bool isRadioClassError(char letter)
     {
         if (RADIOCLASSES[i] == letter)
         {
-            //not valid radio class
-            return true;
+            //valid radio class
+            return false;
         }
     }
-    return false;
+    return true;
 }
 
 /** ***************************************************************************
@@ -509,28 +509,28 @@ void isCallSignError(char arr[5], bool errors[])
     if (arr[0] != 'K' && arr[0] != 'W' && arr[0] != 'N')
     {
         //error if charactor is not a valid letter
-        errors[16] = true;
-        if (!isalpha(arr[0]))
+        errors[18] = true;
+        if (isalpha(arr[0]))
         {
             //error if charactor is not a letter
-            errors[19] = true;
+            errors[21] = true;
         }
     }
     
-    if (!isupper(arr[1]) && !isupper(arr[3]) && !isupper(arr[4]))
+    if (!isupper(arr[1]) || !isupper(arr[3]) || !isupper(arr[4]))
     {
         //error if charactor is not uppercase
-        errors[17] = true;
-        if (isalpha(arr[1]) && isalpha(arr[2]) && isalpha(arr[3]))
+        errors[19] = true;
+        if (isalpha(arr[1]) || isalpha(arr[2]) || isalpha(arr[3]))
         {
             //error if charactor is not a letter
-            errors[19] = true;
+            errors[21] = true;
         }
     }
 
     if (!isdigit(arr[2]))
     {
-        errors[18] = true;
+        errors[20] = true;
     }
 }
 
