@@ -128,15 +128,17 @@ TEST_CASE("test isRadioClassError")
     char ch3 = 'P';
     char ch4 = 't';
     char ch5 = 'T';
+    char ch6 = 'h';
 
     SECTION("TestValidString")
     {
-        CHECK(isRadioClassError(ch) == true);
+        CHECK(isRadioClassError(ch) == false);
         CHECK(isRadioClassError(ch1) == false);
         CHECK(isRadioClassError(ch2) == true);
         CHECK(isRadioClassError(ch3) == false);
-        CHECK(isRadioClassError(ch4) == true);
+        CHECK(isRadioClassError(ch4) == false);
         CHECK(isRadioClassError(ch5) == false);
+        CHECK(isRadioClassError(ch6) == true);
     }
 }
 TEST_CASE("test isCallSignError")

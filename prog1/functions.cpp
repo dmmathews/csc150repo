@@ -484,7 +484,7 @@ bool isRadioClassError(char letter)
     int radioClassSize = 6;
     for (int i = 0; i < radioClassSize; i++)
     {
-        if (RADIOCLASSES[i] == letter)
+        if (RADIOCLASSES[i] == toupper(letter))
         {
             //valid radio class
             return false;
