@@ -77,12 +77,21 @@ int main(int argc, char *argv[])
         bestSteps = row * column * 2;
 
         //find solution
-        solveMaze(arrptr, xpos, ypos, 0, row, column, bestPath, bestSteps);
-
+        if (arrptr[ypos][xpos] == 'W')
+        {
+            solveMaze(arrptr, xpos, ypos, -1, row, column, bestPath, bestSteps);
+        }
+        else
+        {
+            solveMaze(arrptr, xpos, ypos, 0, row, column, bestPath, bestSteps);
+        }
 
         //output solution
-        cout << endl << endl;
-        printMaze(bestPath, row, column, cout);
+        fout << "Size: " << row << "x" << column << endl;
+        fout << "Start loc: " << xpos << " " << ypos << endl;
+        fout << "Shortest Path: " << bestSteps << endl;
+        printMaze(bestPath, row, column, fout);
+        fout << endl;
 
         //free up memory
         freeMemory(arrptr, row);
@@ -108,14 +117,12 @@ void solveMaze(char **arrptr,int xpos, int ypos, int steps, int row, int column,
     }
     if (arrptr[ypos][xpos] == 'E')
     {
-        //found exit
-        cout << "Path found with " << steps << "steps" << endl;
+        //reset best steps to the fastest path to the exit
         if (steps < bestSteps)
         {
             mazeCpy(arrptr, bestPath, row, column);
             bestSteps = steps;
         }
-        printMaze(arrptr, row, column, cout);
         return;
     }
 
