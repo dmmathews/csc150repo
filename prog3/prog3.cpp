@@ -52,9 +52,15 @@
    d:\> c:\bin\prog3.exe input_numbers.txt results.txt
    @endverbatim
  *
+ * @section todo_bugs_modification_section Todo, Bugs, and Modifications
+ *
+ * @todo none
+ *
+ * @bug none
  *
  * @par Modifications and Development Timeline:
-   <a href="https://gitlab.mcs.sdsmt.edu/7472735/csc215s19programs/tree/master/prog3"
+   <a href=
+   "https://gitlab.mcs.sdsmt.edu/7472735/csc215s19programs/tree/master/prog3"
    >Link to commit history on gitlab</a>
  *****************************************************************************/
 #include <iostream>
@@ -66,7 +72,8 @@
 using namespace std;
 
 //function headers here
-void solveMaze(char **arrptr, int xpos, int ypos, int steps, int row, int column, char **&bestPath, int &bestSteps);
+void solveMaze(char **arrptr, int xpos, int ypos, int steps, int row,
+    int column, char **&bestPath, int &bestSteps);
 void freeMemory(char **&arrptr, int row);
 bool readMaze(char **&arrptr, int row, int column, istream &in);
 bool dynamic2dChar(char **&arrptr, int row, int column);
@@ -93,6 +100,7 @@ int main(int argc, char *argv[])
     char **arrptr = nullptr;
     char **bestPath = nullptr;
     int bestSteps = -1;
+    int count = 0;
     int column = 0;
     int row = 0;
     int xpos = 0;
@@ -127,6 +135,8 @@ int main(int argc, char *argv[])
     //input maze
     while (fin >> row >> column >> ypos >> xpos)
     {
+        count++;
+
         //dynamically allocate memory for the maze
         if (!dynamic2dChar(arrptr, row, column + 1))
         {
@@ -158,9 +168,10 @@ int main(int argc, char *argv[])
         }
 
         //output solution
+        fout << "Maze " << count << ":" << endl;
         fout << "Size: " << row << "x" << column << endl;
         fout << "Start loc: " << ypos << " " << xpos << endl;
-        fout << "Shortest Path: " << bestSteps << endl;
+        fout << "Shortest Path: " << bestSteps << " steps" << endl;
         printMaze(bestPath, row, column, fout);
         fout << endl;
 
@@ -195,7 +206,8 @@ int main(int argc, char *argv[])
 * @param[out] bestPath - the maze returned as a dynamic 2d character array
 * @param[out] bestSteps - the fastest number of steps in the solution
 ******************************************************************************/
-void solveMaze(char **arrptr,int xpos, int ypos, int steps, int row, int column, char **&bestPath, int &bestSteps)
+void solveMaze(char **arrptr,int xpos, int ypos, int steps, int row,
+    int column, char **&bestPath, int &bestSteps)
 {
     //check if current location is valid
     if (arrptr[ypos][xpos] == '*' || arrptr[ypos][xpos] == 'L'
@@ -203,6 +215,8 @@ void solveMaze(char **arrptr,int xpos, int ypos, int steps, int row, int column,
     {
         return;
     }
+
+    //check if current location is the exit
     if (arrptr[ypos][xpos] == 'E')
     {
         //reset best steps to the fastest path to the exit
@@ -233,7 +247,7 @@ void solveMaze(char **arrptr,int xpos, int ypos, int steps, int row, int column,
     solveMaze(arrptr, xpos + 1, ypos, steps, row, column, bestPath, bestSteps);
     solveMaze(arrptr, xpos - 1, ypos, steps, row, column, bestPath, bestSteps);
 
-    //unmark location
+    //unmark current location
     if (arrptr[ypos][xpos] == '=')
     {
         arrptr[ypos][xpos] = 'W';
@@ -253,17 +267,20 @@ void solveMaze(char **arrptr,int xpos, int ypos, int steps, int row, int column,
 *
 * @param[in] arrptr - the 2D array to be freed
 * @param[in] row - the number or rows in the array to be freed
-****************************************************************************/
+******************************************************************************/
 void freeMemory(char **&arrptr, int row)
 {
+    //check if memory is already freed
     if (arrptr == nullptr)
     {
         return;
     }
+    //clear each row's individual memory
     for (int i = 0; i < row; i++)
     {
         delete[] arrptr[i];
     }
+    //clear pointer to rows
     delete[] arrptr;
 }
 
@@ -280,11 +297,13 @@ void freeMemory(char **&arrptr, int row)
 *
 * @returns true - the maze was successfully read in
 * @returns false - the maze was not successfully read in
-****************************************************************************/
+******************************************************************************/
 bool readMaze(char **&arrptr, int row, int column, istream &in)
 {
     //clear the base input newline
     in.getline(arrptr[0], column);
+
+    //grab data for every row of the maze
     for (int i = 0; i < row; i++)
     {
         in.getline (arrptr[i], column+1);
@@ -305,18 +324,25 @@ bool readMaze(char **&arrptr, int row, int column, istream &in)
 *
 * @returns true - the memory was successfully allocated
 * @returns false - the memory was not successfully allocated
-****************************************************************************/
+******************************************************************************/
 bool dynamic2dChar(char **&arrptr, int row, int column)
 {
+    //dynamically allocate rows
     arrptr = new (nothrow) char *[row];
+    
+    //check if memory was recieved
     if (arrptr == nullptr)
     {
         cout << "Error allocating memory";
         return false;
     }
+
+    //dynamically allocate columns for each row
     for (int i = 0; i < row; i++)
     {
         arrptr[i] = new (nothrow) char[column];
+
+        //check if memory was actually recieved
         if (arrptr[i] == nullptr)
         {
             //clean up memory if memory not allocated right
@@ -342,9 +368,10 @@ bool dynamic2dChar(char **&arrptr, int row, int column)
 * @param[out] bestPath - the array to copy data to
 * @param[in] row - the number of rows to be copied
 * @param[in] column - the number of columns to be copied
-****************************************************************************/
+******************************************************************************/
 void mazeCpy(char **&arrptr, char **&bestPath, int row, int column)
 {
+    //copy each individual character from one array to the other
     for (int i = 0; i < row; i++)
     {
         for (int j = 0; j < column; j++)
@@ -364,15 +391,18 @@ void mazeCpy(char **&arrptr, char **&bestPath, int row, int column)
 * @param[in] row - the number of rows in the array
 * @param[in] column - the number of columns in the array
 * @param[out] out - the file to print the array to
-****************************************************************************/
+******************************************************************************/
 void printMaze(char **arrptr, int row, int column, ostream &out)
 {
+    //print each character in the 2d array in order
     for (int i = 0; i < row; i++)
     {
+        //print one row of memory
         for (int j = 0; j < column; j++)
         {
             out << arrptr[i][j];
         }
+        //go to the next row
         out << endl;
     }
 }   
