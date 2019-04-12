@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
 
 
     //input maze
-    while (fin >> row >> column >> xpos >> ypos)
+    while (fin >> row >> column >> ypos >> xpos)
     {
         //dynamically allocate memory for the maze
         if (!dynamic2dChar(arrptr, row, column + 1))
@@ -88,7 +88,7 @@ int main(int argc, char *argv[])
 
         //output solution
         fout << "Size: " << row << "x" << column << endl;
-        fout << "Start loc: " << xpos << " " << ypos << endl;
+        fout << "Start loc: " << ypos << " " << xpos << endl;
         fout << "Shortest Path: " << bestSteps << endl;
         printMaze(bestPath, row, column, fout);
         fout << endl;

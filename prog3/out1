@@ -1,11 +1,11 @@
 Size: 10x20
 Start loc: 1 4
-Shortest Path: 36
+Shortest Path: 30
 ********************
-*---- WWWWWW*---   *
-*-**-LLLL *W*-*-****
-*- *-LLLL * *-*--  *
-*-**-LLLL *---**-***
+*   - WWWWWW*---   *
+* **-LLLL *W*-*-****
+*  *-LLLL * *-*--  *
+* **-LLLL *---**-***
 * * --------* **-***
 * * **** **L* * ---*
 * *   LL    * * **-*
@@ -14,25 +14,25 @@ Shortest Path: 36
 
 Size: 10x10
 Start loc: 2 4
-Shortest Path: 10
+Shortest Path: 20
 **********
-*    WWW *
-* ** *** *
-*WWLLLL  *
-**=**LL **
-* ===LL **
-****-*   *
-*  --  ***
+*   -===-*
+* **-***-*
+*WWLLLL--*
+**W**LL-**
+* WWWLL-**
+**** *-- *
+*  ----***
 * *E* ****
 **********
 
 Size: 10x10
 Start loc: 2 4
-Shortest Path: 9
+Shortest Path: 17
 **********
-*        *
-* ** *** *
-*  LLLL  *
+*----    *
+*-**-*** *
+*--LLLL  *
 **-**LL **
 * ---LL **
 ****-*WWW*
@@ -42,9 +42,9 @@ Shortest Path: 9
 
 Size: 10x10
 Start loc: 1 2
-Shortest Path: 13
+Shortest Path: 15
 **********
-*        *
+*--      *
 *-**L*** *
 *-- LLLL *
 **-*LLL **
@@ -56,25 +56,25 @@ Shortest Path: 13
 
 Size: 20x20
 Start loc: 1 18
-Shortest Path: 16
+Shortest Path: 38
 ********************
-*     *     *      *
-* ********* * ******
-*         * * *    *
-* *********   ******
-* *  LLLLLLL*  W*LL*
-* * ********* *W   *
-* *         * *W** *
-* ********* * *W** *
-* WWWWWWWWW        *
-* LLLLLLL LLLLLLL **
-* LLLLLLL LLLLLLL **
-*    *        *    *
-* ******* ***** ** *
-*    *LLLLL*     * *
-*** ********* ******
-*     *E----*      *
-* *********-* ******
-*-----------       *
+*     *     *------*
+* ********* *-******
+*         * *-*    *
+* *********  -******
+* *  LLLLLLL*- W*LL*
+* * *********-*W   *
+* *         *-*W** *
+* ********* *-*W** *
+* WWWWWWWWW  ----- *
+* LLLLLLL LLLLLLL-**
+* LLLLLLL LLLLLLL-**
+*    *        *--- *
+* ******* *****-** *
+*    *LLLLL* --- * *
+*** *********-******
+*     *E----*-     *
+* *********-*-******
+*          ---     *
 ********************
 
