@@ -48,8 +48,11 @@
  *
  * @par Usage:
    @verbatim
-   c:\> prog3.exe input_numbers.txt results.txt
-   d:\> c:\bin\prog3.exe input_numbers.txt results.txt
+   c:\> prog3.exe infile.txt outfile.txt
+   d:\> c:\bin\prog3.exe infile.txt outfile.txt
+
+   infile.txt - The file that mazes are read in from
+   outfile.txt - The file the maze solutions are outputted to
    @endverbatim
  *
  * @section todo_bugs_modification_section Todo, Bugs, and Modifications
